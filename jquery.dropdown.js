@@ -12,6 +12,9 @@ if (jQuery) (function ($) {
         jqDropdown: function (method, data) {
 
             switch (method) {
+                case 'reattachEventListeners':
+                    attachEvents();
+                    return $(this);
                 case 'show':
                     show(null, $(this));
                     return $(this);
@@ -140,8 +143,13 @@ if (jQuery) (function ($) {
         }
     }
 
-    $(document).on('click.jq-dropdown', '[data-jq-dropdown]', show);
-    $(document).on('click.jq-dropdown', hide);
+    function attachEvents() {
+        $(document).off('click.jq-dropdown', '[data-jq-dropdown]', show);
+        $(document).off('click.jq-dropdown', hide);
+        $(document).on('click.jq-dropdown', '[data-jq-dropdown]', show);
+        $(document).on('click.jq-dropdown', hide);
+    }
+    attachEvents();
     $(window).on('resize', position);
 
 })(jQuery);
