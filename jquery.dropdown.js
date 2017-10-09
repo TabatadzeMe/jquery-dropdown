@@ -145,7 +145,7 @@ if (jQuery) (function ($) {
 
     function attachEvent(el) {
         el.click(function() {
-            $(this).hasAttribute('data-jq-dropdown') ? show() : hide();
+            $(this).attr("data-jq-dropdown") ? show() : hide();
         });
     }
     $(document).on('click.jq-dropdown', '[data-jq-dropdown]', show);
