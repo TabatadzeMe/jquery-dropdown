@@ -13,7 +13,7 @@ if (jQuery) (function ($) {
 
             switch (method) {
                 case 'attachEvent':
-                    attachEvents($(this));
+                    attachEvent($(this));
                     return $(this);
                 case 'show':
                     show(null, $(this));
