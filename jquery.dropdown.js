@@ -12,8 +12,8 @@ if (jQuery) (function ($) {
         jqDropdown: function (method, data) {
 
             switch (method) {
-                case 'reattachEventListeners':
-                    attachEvents();
+                case 'attachEvent':
+                    attachEvents($(this));
                     return $(this);
                 case 'show':
                     show(null, $(this));
@@ -143,13 +143,13 @@ if (jQuery) (function ($) {
         }
     }
 
-    function attachEvents() {
-        $(document).off('click.jq-dropdown', '[data-jq-dropdown]', show);
-        $(document).off('click.jq-dropdown', hide);
-        $(document).on('click.jq-dropdown', '[data-jq-dropdown]', show);
-        $(document).on('click.jq-dropdown', hide);
+    function attachEvent(el) {
+        el.click(function() {
+            $(this).hasAttribute('data-jq-dropdown') ? show() : hide();
+        });
     }
-    attachEvents();
+    $(document).on('click.jq-dropdown', '[data-jq-dropdown]', show);
+    $(document).on('click.jq-dropdown', hide);
     $(window).on('resize', position);
 
 })(jQuery);
