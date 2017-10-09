@@ -123,6 +123,8 @@ if (jQuery) (function ($) {
             hOffset = trigger ? parseInt(trigger.attr('data-horizontal-offset') || 0, 10) : null,
             vOffset = trigger ? parseInt(trigger.attr('data-vertical-offset') || 0, 10) : null;
 
+        trigger.offsetParent().append(jqDropdown);
+
         if (jqDropdown.length === 0 || !trigger) return;
 
         // Position the jq-dropdown relative-to-parent...
@@ -145,7 +147,7 @@ if (jQuery) (function ($) {
 
     function attachEvent(el) {
         el.click(function() {
-            $(this).attr("data-jq-dropdown") ? show() : hide();
+            $(this).attr("data-jq-dropdown") ? show.apply(this,arguments) : hide.apply(this,arguments);
         });
     }
     $(document).on('click.jq-dropdown', '[data-jq-dropdown]', show);
